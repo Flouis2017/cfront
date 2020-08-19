@@ -1,18 +1,48 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+
+	<div>
+		<!-- 引入头部导航栏 -->
+		<v-header/>
+
+		<!-- 引入侧边导航栏 -->
+		<v-sidebar/>
+
+		<!-- 主页面业务 -->
+		<div class="content-box">
+			<div class="content">
+				<router-view/>
+			</div>
+		</div>
+	</div>
+
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+	import vHeader from '../components/Header'
+	import vSidebar from '../components/Sidebar'
+
+	export default {
+		name: 'Home',
+		data(){
+			return{
+				collapse: false
+			}
+		},
+		components: {
+			vHeader,
+			vSidebar
+		},
+		created(){
+			this.$bus.emit("collapse-content", msg =>{
+				this.collapse = msg;
+			});
+		},
+		beforeDestroy(){
+			this.$bus.off("collapse-content", msg =>{
+				this.collapse = msg;
+			});
+		}
+	}
+
 </script>
