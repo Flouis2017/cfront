@@ -8,7 +8,7 @@
 		<v-sidebar/>
 
 		<!-- 主页面业务 -->
-		<div class="content-box">
+		<div class="content-box" :class="{'content-collapse':collapse}">
 			<div class="content">
 				<router-view/>
 			</div>
@@ -34,7 +34,7 @@
 			vSidebar
 		},
 		created(){
-			this.$bus.emit("collapse-content", msg =>{
+			this.$bus.on("collapse-content", msg =>{
 				this.collapse = msg;
 			});
 		},

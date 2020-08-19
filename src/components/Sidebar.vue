@@ -92,9 +92,15 @@
 						]
 					},
 					{
-						icon: 'el-icon-setting',
-						index: 'pwdsetting',
-						title: '修改密码'
+						icon: 'el-icon-user',
+						index: '5',
+						title: '个人中心',
+						subs: [
+							{
+								index: 'pwdsetting',
+								title: '修改密码'
+							}
+						]
 					},
 				]
 			}

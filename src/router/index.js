@@ -24,7 +24,8 @@ const routes = [
 			{
 				path: '/pwdsetting',
 				name: 'PwdSetting',
-				component: () => import('../views/PwdSetting.vue')
+				component: () => import('../views/PwdSetting.vue'),
+				meta: {requiredAuth: true}
 			}
 		]
 	},
@@ -43,6 +44,21 @@ const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes
+});
+
+// 路由拦截器
+router.beforeEach((to, from, next) =>{
+	if (to.meta.requiredAuth){
+		if (Boolean(sessionStorage.getItem('uid'))){
+			next();
+		} else {
+			next({
+				path: '/'
+			});
+		}
+	} else {
+		next();
+	}
 });
 
 export default router
