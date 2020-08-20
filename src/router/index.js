@@ -25,7 +25,13 @@ const routes = [
 				path: '/pwdsetting',
 				name: 'PwdSetting',
 				component: () => import('../views/PwdSetting.vue'),
-				meta: {requiredAuth: true}
+				// meta: {requiredAuth: true}
+			},
+			{
+				path: '/transfer',
+				name: 'Transfer',
+				component: () => import('../views/Transfer.vue'),
+				// meta: {requiredAuth: true}
 			}
 		]
 	},

@@ -1,10 +1,12 @@
 <template>
-    <div class="crumbs">
-        <el-breadcrumb separator="/" style="margin-bottom: 5px">
-            <el-breadcrumb-item>
-                <i class="el-icon-setting"></i> 修改密码
-            </el-breadcrumb-item>
-        </el-breadcrumb>
+	<div>
+		<div class="crumbs">
+			<el-breadcrumb separator="/">
+				<el-breadcrumb-item>
+					<i class="el-icon-setting"/> 修改密码
+				</el-breadcrumb-item>
+			</el-breadcrumb>
+		</div>
 
         <el-card shadow="hover" class="container">
             <el-row style="padding: 0 15%">
