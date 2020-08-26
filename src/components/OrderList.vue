@@ -9,8 +9,8 @@
 			<el-table-column align="center" prop="name" label="股票名称"/>
 			<el-table-column align="center" prop="price" label="委托单价"/>
 			<el-table-column align="center" prop="count" label="委托数量"/>
-			<el-table-column align="center" prop="direction" label="方向"/>
-			<el-table-column align="center" prop="status" label="状态"/>
+			<el-table-column align="center" prop="direction" label="方向" :formatter="showDirection"/>
+			<el-table-column align="center" prop="status" label="状态" :formatter="showStatus"/>
 			<!-- 撤单按钮 -->
 
 		</el-table>
@@ -72,6 +72,26 @@
 						}
 					);
 				}
+			},
+			showStatus(row, column, value){
+				let statusText = "";
+				switch (value) {
+					case 1:
+						statusText = "已成";
+						break;
+					case 2:
+						statusText = "已报价";
+						break;
+					case 3:
+						statusText = "已撤销";
+						break;
+					default:
+						statusText = "-";
+				}
+				return statusText;
+			},
+			showDirection(row, column, value){
+				return value == 1 ? "买入" : "卖出";
 			}
 		}
 	}
