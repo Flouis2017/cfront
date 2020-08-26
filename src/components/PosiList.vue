@@ -10,9 +10,9 @@
 		<!-- 持仓列表 -->
 		<el-table :data="tableData.slice((query.currentPage - 1)*query.pageSize, query.currentPage*query.pageSize)"
 				  border :cell-style="cellStyle" @sort-change="handleTableSort">
-			<el-table-column align="center" prop="code" label="代码" sortable :sort-orders="['ascending', 'descending']"/>
-			<el-table-column align="center" prop="name" label="名称"/>
-			<el-table-column align="center" prop="count" label="数量"/>
+			<el-table-column align="center" prop="code" label="股票代码" sortable :sort-orders="['ascending', 'descending']"/>
+			<el-table-column align="center" prop="name" label="股票名称"/>
+			<el-table-column align="center" prop="count" label="持有数量"/>
 			<el-table-column align="center" prop="cost" label="总投入"/>
 			<el-table-column align="center" label="成本"/>
 		</el-table>
@@ -35,10 +35,10 @@
 			return {
 				balance: 10000,
 				tableData: [
-					{code: 600025, name: '华能水电', count: 100, cost: 20},
-					{code: 600000, name: '浦发银行', count: 100, cost: 12},
-					{code: 600001, name: '平安银行', count: 100, cost: 22},
-					{code: 600886, name: '国投电力', count: 100, cost: 26},
+					{code: '600025', name: '华能水电', count: 100, cost: 20},
+					{code: '600000', name: '浦发银行', count: 100, cost: 12},
+					{code: '600001', name: '平安银行', count: 100, cost: 22},
+					{code: '600886', name: '国投电力', count: 100, cost: 26},
 				],
 				total: 4,
 				query: {

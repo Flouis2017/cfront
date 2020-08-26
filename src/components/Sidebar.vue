@@ -62,7 +62,7 @@
 								title: '当日委托'
 							},
 							{
-								index: 'tradequery',
+								index: 'dealquery',
 								title: '当日成交'
 							},
 							{
@@ -70,7 +70,7 @@
 								title: '历史委托'
 							},
 							{
-								index: 'histradequery',
+								index: 'hisdealquery',
 								title: '历史成交'
 							},
 						]

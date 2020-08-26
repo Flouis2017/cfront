@@ -32,6 +32,26 @@ const routes = [
 				name: 'Transfer',
 				component: () => import('../views/Transfer.vue'),
 				// meta: {requiredAuth: true}
+			},
+			{
+				path: '/orderquery',
+				name: 'OrderQuery',
+				component: () => import('../views/OrderQuery.vue')
+			},
+			{
+				path: '/dealquery',
+				name: 'DealQuery',
+				component: () => import('../views/DealQuery.vue')
+			},
+			{
+				path: '/hisorderquery',
+				name: 'HisOrderQuery',
+				component: () => import('../views/HisOrderQuery.vue')
+			},
+			{
+				path: '/hisdealquery',
+				name: 'HisDealQuery',
+				component: () => import('../views/HisDealQuery.vue')
 			}
 		]
 	},
