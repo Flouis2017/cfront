@@ -1,0 +1,45 @@
+<template>
+	<div>
+		<div class="crumbs">
+			<el-breadcrumb separator="/">
+				<el-breadcrumb-item>
+					<i class="el-icon-s-order"/> 委托
+				</el-breadcrumb-item>
+				<el-breadcrumb-item>卖出</el-breadcrumb-item>
+			</el-breadcrumb>
+		</div>
+
+		<el-card shadow="hover" class="container">
+			<el-row>
+				<!-- 委托组件 -->
+				<el-col :span="12">
+					<order-form :direction="2"/>
+				</el-col>
+
+				<!-- 订单簿组件 -->
+				<el-col :span="12">
+
+				</el-col>
+			</el-row>
+
+			<!-- 资金持仓组件 -->
+			<posi-list/>
+
+		</el-card>
+	</div>
+</template>
+
+<script>
+
+	import PosiList from '../components/PosiList'
+	import OrderForm from '../components/OrderForm'
+
+	export default {
+		name: "Buy",
+		components: {PosiList, OrderForm}
+	}
+</script>
+
+<style scoped>
+
+</style>

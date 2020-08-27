@@ -52,6 +52,16 @@ const routes = [
 				path: '/hisdealquery',
 				name: 'HisDealQuery',
 				component: () => import('../views/HisDealQuery.vue')
+			},
+			{
+				path: '/buy',
+				name: 'Buy',
+				component: () => import('../views/Buy.vue')
+			},
+			{
+				path: '/sell',
+				name: 'Sell',
+				component: () => import('../views/Sell.vue')
 			}
 		]
 	},
