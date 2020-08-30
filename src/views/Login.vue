@@ -2,37 +2,37 @@
 	<!-- 注意：在vue中template只能有一个顶级的element，两个的话在编译时会报错！ -->
 	<div class="login-wrap">
 		<!-- 创建element-ui表单，该项目中以“el-”开头的都是ElementUI组件 -->
-		<el-form class="login-container">
+		<el-form class="login-container" :model="ruleForm" :rules="rules" ref="ruleForm">
 			<!-- 头部信息 -->
 			<h3 class="title">用户登录</h3>
 
 			<!-- 账号输入框 -->
-			<el-form-item>
-				<el-input type="text" placeholder="账号"/>
+			<el-form-item prop="uid">
+				<el-input v-model="ruleForm.uid" type="text" placeholder="账号"/>
 			</el-form-item>
 
 			<!-- 密码输入框 -->
-			<el-form-item>
-				<el-input type="password" placeholder="密码"/>
+			<el-form-item prop="password">
+				<el-input v-model="ruleForm.password" type="password" placeholder="密码" @keyup.enter.native="submitForm('ruleForm')"/>
 			</el-form-item>
 
 			<!-- 验证码 -->
 			<el-row>
 				<!-- 验证码输入框 -->
 				<el-col :span="12">
-					<el-form-item>
-						<el-input type="text" placeholder="验证码"/>
+					<el-form-item prop="captcha">
+						<el-input v-model="ruleForm.captcha" type="text" placeholder="验证码" @keyup.enter.native="submitForm('ruleForm')"/>
 					</el-form-item>
 				</el-col>
 
 				<!-- 验证码图片 -->
-				<el-col :span="12">
-					<img />
+				<el-col :span="12" style="text-align: right; cursor: pointer">
+					<img :src="captchaImg" @click="getCaptchaImg()"/>
 				</el-col>
 			</el-row>
 
 			<el-form-item>
-				<el-button type="primary" style="width: 100%">登录</el-button>
+				<el-button type="primary" style="width: 100%" :loading="logining" @click="submitForm('ruleForm')">登录</el-button>
 			</el-form-item>
 
 		</el-form>
@@ -40,8 +40,89 @@
 </template>
 
 <script>
+
+	import {queryCaptcha, login} from '../api/loginApi'
+	import encryptMD5 from 'js-md5'
+
 	export default {
-		name: "Login"
+		name: "Login",
+		data(){
+			return {
+				// 1. 提交登录表单
+				ruleForm: {
+					uid: '',
+					password: '',
+					captcha: '',
+					captchaId: ''
+				},
+
+				// 2. 验证码图片 Base64
+				captchaImg: '',
+
+				// 3. 表单校验
+				rules: {
+					uid: [{required: true, message: "请输入账号", trigger: 'blur'}],
+					password: [{required: true, message: "请输入密码", trigger: 'blur'}],
+					captcha: [{required: true, message: "请输入验证码", trigger: 'blur'}]
+				},
+
+				// 4. 防止前端重复提交表单
+				logining: false
+			}
+		},
+		// 加载页面立刻执行
+		created(){
+			this.getCaptchaImg();
+		},
+		methods: {
+			// 验证码回调函数
+			captchaCallback(code, msg, captchaData){
+				this.ruleForm.captchaId = captchaData.id;
+				this.captchaImg = captchaData.imgBase64;
+			},
+
+			// 获取验证码图片
+			getCaptchaImg(){
+				queryCaptcha(this.captchaCallback);
+			},
+
+			// 登录回调函数
+			loginCallback(code, msg, account){
+				if (code != 2000){
+					this.$message.error(msg);
+					this.logining = false;
+					this.getCaptchaImg();
+				} else {
+					sessionStorage.setItem("uid", account.uid);
+					sessionStorage.setItem("token", account.token);
+					this.$message.success("登录成功");
+
+					// 跳转到主页面
+					setTimeout(() => {
+						this.logining = false;
+						this.$router.push({path: '/dashboard'});
+					}, 1000);
+				}
+			},
+
+			// 提交表单
+			submitForm(formRef){
+				this.$refs[formRef].validate(valid => {
+					if (valid){
+						this.logining = true;
+						login({
+							uid: this.ruleForm.uid,
+							password: encryptMD5(this.ruleForm.password),
+							captcha: this.ruleForm.captcha,
+							captchaId: this.ruleForm.captchaId
+						}, this.loginCallback);
+					} else {
+						this.$message.error('账号/密码/验证码不能为空！');
+						this.logining = false;
+					}
+				});
+			}
+		}
 	}
 </script>
 
