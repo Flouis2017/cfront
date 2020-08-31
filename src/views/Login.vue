@@ -8,7 +8,7 @@
 
 			<!-- 账号输入框 -->
 			<el-form-item prop="uid">
-				<el-input v-model="ruleForm.uid" type="text" placeholder="账号"/>
+				<el-input v-model.trim="ruleForm.uid" type="text" placeholder="账号"/>
 			</el-form-item>
 
 			<!-- 密码输入框 -->
@@ -21,7 +21,7 @@
 				<!-- 验证码输入框 -->
 				<el-col :span="12">
 					<el-form-item prop="captcha">
-						<el-input v-model="ruleForm.captcha" type="text" placeholder="验证码" @keyup.enter.native="submitForm('ruleForm')"/>
+						<el-input v-model.trim="ruleForm.captcha" type="text" placeholder="验证码" @keyup.enter.native="submitForm('ruleForm')"/>
 					</el-form-item>
 				</el-col>
 
@@ -72,6 +72,10 @@
 		},
 		// 加载页面立刻执行
 		created(){
+			// 注意：这里是$route而不是$router
+			if (Boolean(this.$route.query.msg)){
+				this.$message.info(this.$route.query.msg + "");
+			}
 			this.getCaptchaImg();
 		},
 		methods: {

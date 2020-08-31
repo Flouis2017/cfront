@@ -1,4 +1,4 @@
-import {reqRealEnd, reqRealEndAsync} from './axiosCommon'
+import {reqWithoutCallbackSync, reqRealEndAsync} from './axiosCommon'
 
 import {config} from './frontConfig'
 
@@ -15,7 +15,10 @@ export const login = (params, callback) => {
 };
 
 //退出登录
-export const logout = () =>{
+export const logout = (params) =>{
+    //通知柜台
+    reqWithoutCallbackSync("post", config.real_domain,'/login/logout', params);
+
     //移除登录信息
     sessionStorage.removeItem("uid");
     sessionStorage.removeItem("token");
@@ -26,16 +29,11 @@ export const logout = () =>{
             msg: "成功退出"
         }
     });
-
-    //通知柜台
-    reqRealEnd("post",config.real_domain,'/login/logout',{});
-
 }
 
 
-export const pwdUpdate = (params,callback) =>{
-    return reqRealEndAsync("post",config.real_domain,
-        '/login/pwdupdate',params,callback);
+export const pwdUpdate = (params, callback) =>{
+    return reqRealEndAsync("post", config.real_domain, '/login/pwdupdate', params, callback);
 }
 
 

@@ -19,49 +19,56 @@ const routes = [
 			{
 				path: '/dashboard',
 				name: 'Dashboard',
-				component: () => import('../views/Dashboard.vue')
+				component: () => import('../views/Dashboard.vue'),
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/pwdsetting',
 				name: 'PwdSetting',
 				component: () => import('../views/PwdSetting.vue'),
-				// meta: {requiredAuth: true}
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/transfer',
 				name: 'Transfer',
 				component: () => import('../views/Transfer.vue'),
-				// meta: {requiredAuth: true}
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/orderquery',
 				name: 'OrderQuery',
-				component: () => import('../views/OrderQuery.vue')
+				component: () => import('../views/OrderQuery.vue'),
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/dealquery',
 				name: 'DealQuery',
-				component: () => import('../views/DealQuery.vue')
+				component: () => import('../views/DealQuery.vue'),
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/hisorderquery',
 				name: 'HisOrderQuery',
-				component: () => import('../views/HisOrderQuery.vue')
+				component: () => import('../views/HisOrderQuery.vue'),
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/hisdealquery',
 				name: 'HisDealQuery',
-				component: () => import('../views/HisDealQuery.vue')
+				component: () => import('../views/HisDealQuery.vue'),
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/buy',
 				name: 'Buy',
-				component: () => import('../views/Buy.vue')
+				component: () => import('../views/Buy.vue'),
+				meta: {requiredAuth: true}
 			},
 			{
 				path: '/sell',
 				name: 'Sell',
-				component: () => import('../views/Sell.vue')
+				component: () => import('../views/Sell.vue'),
+				meta: {requiredAuth: true}
 			}
 		]
 	},

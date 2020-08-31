@@ -13,7 +13,7 @@ import axios from 'axios';
 export const reqRealEndAsync = (method, baseUrl, url, params, callback) => {
     params.token = sessionStorage.getItem('token');
     return axios({
-        timeout: 5000,
+        timeout: 50000,
         baseURL: baseUrl,
         method: method,
         url: url,
@@ -29,7 +29,7 @@ export const reqRealEndAsync = (method, baseUrl, url, params, callback) => {
         if (result.flag == false) {
             // 请求失败
             router.replace({
-                path: "login",
+                path: "xxxxx",
                 query: {
                     msg: result.message
                 }
@@ -43,11 +43,11 @@ export const reqRealEndAsync = (method, baseUrl, url, params, callback) => {
     });
 };
 
-//通用公共方法(不包含回调)
-export const reqRealEnd = (method, baseUrl, url, params) => {
+//通用异步公共方法(不包含回调)
+export const reqWithoutCallbackAsync = (method, baseUrl, url, params) => {
     params.token = sessionStorage.getItem('token');
     return axios({
-        timeout: 5000,
+        timeout: 50000,
         baseURL: baseUrl,
         method: method,
         url: url,
@@ -57,6 +57,23 @@ export const reqRealEnd = (method, baseUrl, url, params) => {
         data: Qs.stringify(params),
         //false -- split
         //true -- List<String>
+        traditional: true,
+    });
+};
+
+// 通用异步公共方法(不包含回调)
+export const reqWithoutCallbackSync = (method, baseUrl, url, params) => {
+    params.token = sessionStorage.getItem('token');
+    return axios({
+        async: false,
+        timeout: 50000,
+        baseURL: baseUrl,
+        method: method,
+        url: url,
+        headers:{
+            'Content-type': 'application/x-www-form-urlencoded',
+        },
+        data: Qs.stringify(params),
         traditional: true,
     });
 };

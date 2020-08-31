@@ -1,4 +1,4 @@
-import {reqRealEnd, reqRealEndAsync} from './axiosCommon'
+import {reqWithoutCallbackAsync, reqRealEndAsync} from './axiosCommon'
 
 import {config} from './frontConfig'
 
@@ -28,8 +28,7 @@ export const queryPosi = () => {
 
 //查股票代码
 export const queryCodeName = (params) => {
-    return reqRealEnd("post",
-        config.real_domain, '/api/code', params);
+    return reqWithoutCallbackAsync("post", config.real_domain, '/api/code', params);
 };
 
 //查委托

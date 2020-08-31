@@ -12,14 +12,14 @@
 		<!-- 用户信息+下拉菜单 -->
 		<div class="header-right">
 			<div class="header-user-con">
-				<el-dropdown class="user-name" trigger="click">
+				<el-dropdown class="user-name" trigger="click" @command="handleCommand">
 					<span class="el-dropdown-link">
 						{{username}}
 						<i class="el-icon-caret-bottom"/>
 					</span>
 
 					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>退出登录</el-dropdown-item>
+						<el-dropdown-item command="logoutClick">退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</div>
@@ -29,6 +29,9 @@
 </template>
 
 <script>
+
+import {logout} from '../api/loginApi'
+
 export default {
 	name: "Header",
 	data(){
@@ -43,6 +46,12 @@ export default {
 		}
 	},
 	methods: {
+		// 账号下拉菜单事件响应
+		handleCommand(command){
+			if (command == 'logoutClick'){
+				logout({token: sessionStorage.getItem("token")});
+			}
+		},
 		collapseChange(){
 			this.collapse = !this.collapse;
 			this.$bus.emit("collapse", this.collapse);
