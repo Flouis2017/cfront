@@ -33,8 +33,13 @@ export default {
 	name: "Header",
 	data(){
 		return {
-			username: 'guest',
 			collapse: true
+		}
+	},
+	computed: {
+		username(){
+			let acc = sessionStorage.getItem("uid");
+			return acc ? acc : 'guest';
 		}
 	},
 	methods: {

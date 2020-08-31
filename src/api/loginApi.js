@@ -11,7 +11,7 @@ export const queryCaptcha = (callback) => {
 
 // 登录
 export const login = (params, callback) => {
-    return reqRealEndAsync("post", config.real_domain, "/login/userLogin", params, callback);
+    return reqRealEndAsync("post", config.real_domain, "/login/doLogin", params, callback);
 };
 
 //退出登录
