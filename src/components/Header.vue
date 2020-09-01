@@ -30,8 +30,8 @@
 
 <script>
 
-import {logout} from '../api/loginApi'
-import router from '../router'
+import {logout, logoutCallback} from '../api/loginApi'
+// import router from '../router'
 
 export default {
 	name: "Header",
@@ -47,8 +47,7 @@ export default {
 		}
 	},
 	methods: {
-		logoutCallback(code, msg, data){
-			debugger;
+		/*logoutCallback(code, msg, data){
 			if (code != 2000){
 				this.$message.error(msg);
 			} else {
@@ -63,12 +62,11 @@ export default {
 					}
 				});
 			}
-		},
+		},*/
 		// 账号下拉菜单事件响应
 		handleCommand(command){
-			debugger;
 			if (command == 'logoutClick'){
-				logout({token: sessionStorage.getItem("token")}, this.logoutCallback);
+				logout({token: sessionStorage.getItem("token")}, logoutCallback);
 			}
 		},
 		collapseChange(){

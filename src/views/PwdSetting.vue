@@ -32,7 +32,7 @@
 <script>
 
     import encryptMD5 from 'js-md5';
-    import {pwdUpdate, logout} from '../api/loginApi'
+    import {pwdUpdate, logout, logoutCallback} from '../api/loginApi'
 
     export default {
         name: "PwdSetting",
@@ -46,16 +46,17 @@
             }
         },
         methods: {
-            logoutCallback(code,msg,data){
-              if(code != 0){
-                  this.$message.error(msg);
-              }  else {
-                  logout();
-              }
+			pwdUpdateCallback(code, msg, data) {
+				debugger;
+				if (code != 2000) {
+				  this.$message.error(msg);
+				} else {
+				  logout({token: sessionStorage.getItem("token")}, logoutCallback);
+				}
             },
             onSubmit() {
                 if (this.form.newpassword != this.form.newpasswordcfm) {
-                    this.$message.warning("两次密码输入不一致，请重新输入");
+                    this.$message.warning("确认密码失败，请重新输入");
                     return;
                 }
 
@@ -66,11 +67,9 @@
 
                 pwdUpdate({
                         uid: sessionStorage.getItem("uid"),
-                        oldpwd: encryptMD5(this.form.oldpassword),
-                        newpwd: encryptMD5(this.form.newpassword),
-                    },
-                    this.logoutCallback
-                )
+                        oldPassword: encryptMD5(this.form.oldpassword),
+                        newPassword: encryptMD5(this.form.newpassword),
+                    }, this.pwdUpdateCallback);
             }
         }
     }
