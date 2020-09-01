@@ -1,4 +1,4 @@
-import {reqWithoutCallbackAsync, reqRealEndAsync} from './axiosCommon'
+import {reqWithoutCallbackAsync, reqWithCallbackAsync} from './axiosCommon'
 
 import {config} from './frontConfig'
 
@@ -6,7 +6,7 @@ import store from '../store/index'
 
 //查资金
 export const queryBalance = () => {
-    reqRealEndAsync("post", config.real_domain,
+    reqWithCallbackAsync("post", config.real_domain,
         '/api/balance',
         {uid: sessionStorage.getItem('uid')},
         (code, msg, data) => {
@@ -17,7 +17,7 @@ export const queryBalance = () => {
 
 //查持仓
 export const queryPosi = () => {
-    reqRealEndAsync("post", config.real_domain,
+    reqWithCallbackAsync("post", config.real_domain,
         '/api/posiinfo',
         {uid: sessionStorage.getItem('uid')},
         (code, msg, data) => {
@@ -33,7 +33,7 @@ export const queryCodeName = (params) => {
 
 //查委托
 export const queryOrder = () => {
-    reqRealEndAsync("post", config.real_domain,
+    reqWithCallbackAsync("post", config.real_domain,
         '/api/orderinfo',
         {uid: sessionStorage.getItem('uid')},
         (code, msg, data) => {
@@ -43,7 +43,7 @@ export const queryOrder = () => {
 
 //查成交
 export const queryTrade = () => {
-    reqRealEndAsync("post", config.real_domain,
+    reqWithCallbackAsync("post", config.real_domain,
         '/api/tradeinfo',
         {uid: sessionStorage.getItem('uid')},
         (code, msg, data) => {
@@ -53,11 +53,11 @@ export const queryTrade = () => {
 
 //发送委托
 export const sendOrder = (params,callback) =>{
-    return reqRealEndAsync("post",config.real_domain,
+    return reqWithCallbackAsync("post",config.real_domain,
         '/api/sendorder',params,callback);
 }
 
 // 委托
 export const cancelOrder = (params,callback) => {
-    return reqRealEndAsync("post", config.real_domain, '/api/cancelorder', params, callback);
+    return reqWithCallbackAsync("post", config.real_domain, '/api/cancelorder', params, callback);
 };

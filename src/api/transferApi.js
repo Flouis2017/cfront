@@ -1,8 +1,8 @@
-import {reqRealEndAsync} from './axiosCommon';
+import {reqWithCallbackAsync} from './axiosCommon';
 
 import {config} from './frontConfig'
 
 export const queryTransfer = (params,callback) =>{
-    return reqRealEndAsync("post",config.real_domain,
+    return reqWithCallbackAsync("post",config.real_domain,
         '/api/transferquery',params,callback);
 };

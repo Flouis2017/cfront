@@ -5,12 +5,12 @@ import router from '../router'
 //name=hello&age=13
 import Qs from 'qs';
 
-//包装了ajax，方便http调用
+//包装了ajax，方便http调用，需要注意的是axios不提供同步执行，不能想jQuery的$.ajax那样通过async: false进行同步设置
 import axios from 'axios';
 
-//通用公共方法(包含回调)
+// 通用公共方法(包含回调)
 /*参数说明：baseUrl：域名+端口号*/
-export const reqRealEndAsync = (method, baseUrl, url, params, callback) => {
+export const reqWithCallbackAsync = (method, baseUrl, url, params, callback) => {
     params.token = sessionStorage.getItem('token');
     return axios({
         timeout: 50000,
@@ -43,29 +43,10 @@ export const reqRealEndAsync = (method, baseUrl, url, params, callback) => {
     });
 };
 
-//通用异步公共方法(不包含回调)
+//通用公共方法(不包含回调)
 export const reqWithoutCallbackAsync = (method, baseUrl, url, params) => {
     params.token = sessionStorage.getItem('token');
     return axios({
-        timeout: 50000,
-        baseURL: baseUrl,
-        method: method,
-        url: url,
-        headers:{
-            'Content-type': 'application/x-www-form-urlencoded',
-        },
-        data: Qs.stringify(params),
-        //false -- split
-        //true -- List<String>
-        traditional: true,
-    });
-};
-
-// 通用异步公共方法(不包含回调)
-export const reqWithoutCallbackSync = (method, baseUrl, url, params) => {
-    params.token = sessionStorage.getItem('token');
-    return axios({
-        async: false,
         timeout: 50000,
         baseURL: baseUrl,
         method: method,

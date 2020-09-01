@@ -85,8 +85,7 @@ const routes = [
 
 const router = new VueRouter({
 	mode: 'history',
-	base: process.env.BASE_URL,
-	routes
+	base: process.env.BASE_URL, routes
 });
 
 // 路由拦截器

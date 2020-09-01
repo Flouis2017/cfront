@@ -10,7 +10,13 @@
 
 <script>
     export default {
-		name: "404"
+		name: "404",
+		created(){
+			// 注意：这里是$route而不是$router
+			if (Boolean(this.$route.query.msg)){
+				this.$message.info(this.$route.query.msg + "");
+			}
+		}
     }
 </script>
 

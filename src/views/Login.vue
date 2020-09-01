@@ -102,10 +102,8 @@
 					this.$message.success("登录成功");
 
 					// 跳转到主页面
-					setTimeout(() => {
-						this.logining = false;
-						this.$router.push({path: '/dashboard'});
-					}, 1000);
+					this.logining = false;
+					this.$router.push({path: '/dashboard'});
 				}
 			},
 

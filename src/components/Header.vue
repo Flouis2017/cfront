@@ -31,6 +31,7 @@
 <script>
 
 import {logout} from '../api/loginApi'
+import router from '../router'
 
 export default {
 	name: "Header",
@@ -46,10 +47,28 @@ export default {
 		}
 	},
 	methods: {
+		logoutCallback(code, msg, data){
+			debugger;
+			if (code != 2000){
+				this.$message.error(msg);
+			} else {
+				//移除登录信息
+				sessionStorage.removeItem("uid");
+				sessionStorage.removeItem("token");
+				//跳转登录页面
+				router.replace({
+					path: "/",
+					query: {
+						msg: "成功退出"
+					}
+				});
+			}
+		},
 		// 账号下拉菜单事件响应
 		handleCommand(command){
+			debugger;
 			if (command == 'logoutClick'){
-				logout({token: sessionStorage.getItem("token")});
+				logout({token: sessionStorage.getItem("token")}, this.logoutCallback);
 			}
 		},
 		collapseChange(){
