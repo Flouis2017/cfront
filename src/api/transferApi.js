@@ -2,7 +2,10 @@ import {reqWithCallbackAsync} from './axiosCommon';
 
 import {config} from './frontConfig'
 
-export const queryTransfer = (params,callback) =>{
-    return reqWithCallbackAsync("post",config.real_domain,
-        '/api/transferquery',params,callback);
+export const transfer  = (params, callback) =>{
+    return reqWithCallbackAsync("post", config.real_domain, "/transfer/doTransfer", params, callback);
+};
+
+export const queryTransfer = (params, callback) =>{
+    return reqWithCallbackAsync("post", config.real_domain, "/transfer/transferquery", params, callback);
 };

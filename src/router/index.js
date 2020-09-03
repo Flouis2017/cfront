@@ -35,6 +35,12 @@ const routes = [
 				meta: {requiredAuth: true}
 			},
 			{
+				path: '/transferquery',
+				name: 'TransferQuery',
+				component: () => import('../views/TransferQuery.vue'),
+				meta: {requiredAuth: true}
+			},
+			{
 				path: '/orderquery',
 				name: 'OrderQuery',
 				component: () => import('../views/OrderQuery.vue'),
