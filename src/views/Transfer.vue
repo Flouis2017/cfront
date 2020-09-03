@@ -85,6 +85,7 @@
 						this.$message.error(msg);
 					} else {
 						this.$message.success(msg);
+						this.$router.push({path: "/dashboard"});
 					}
 				});
 			}
