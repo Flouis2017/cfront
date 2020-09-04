@@ -6,24 +6,22 @@ import store from '../store/index'
 
 //查资金
 export const queryBalance = () => {
-    reqWithCallbackAsync("post", config.real_domain,
-        '/api/balance',
+    reqWithCallbackAsync("post", config.real_domain, '/api/balance',
         {uid: sessionStorage.getItem('uid')},
         (code, msg, data) => {
             // store.state.posiData = data;
-            store.commit("updateBalance", data)
-        })
+            store.commit("updateBalance", data);
+        });
 };
 
 //查持仓
-export const queryPosi = () => {
-    reqWithCallbackAsync("post", config.real_domain,
-        '/api/posiinfo',
+export const queryPosiList = () => {
+    reqWithCallbackAsync("post", config.real_domain, '/api/posiData',
         {uid: sessionStorage.getItem('uid')},
         (code, msg, data) => {
             // store.state.posiData = data;
             store.commit("updatePosi", data)
-        })
+        });
 };
 
 //查股票代码
@@ -55,7 +53,7 @@ export const queryTrade = () => {
 export const sendOrder = (params,callback) =>{
     return reqWithCallbackAsync("post",config.real_domain,
         '/api/sendorder',params,callback);
-}
+};
 
 // 委托
 export const cancelOrder = (params,callback) => {
