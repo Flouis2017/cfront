@@ -6,18 +6,16 @@ import store from '../store/index'
 
 //查资金
 export const queryBalance = () => {
-    reqWithCallbackAsync("post", config.real_domain, '/api/balance',
-        {uid: sessionStorage.getItem('uid')},
-        (code, msg, data) => {
-            // store.state.posiData = data;
-            store.commit("updateBalance", data);
+    reqWithCallbackAsync("post", config.real_domain, '/api/queryBalance',
+        {uid: sessionStorage.getItem('uid')}, (code, msg, data) => {
+            store.commit("updateBalance", data.balance);
         });
 };
 
 //查持仓
-export const queryPosiList = () => {
-    reqWithCallbackAsync("post", config.real_domain, '/api/posiData',
-        {uid: sessionStorage.getItem('uid')},
+export const queryPosiList = (params) => {
+    params.uid = sessionStorage.getItem('uid');
+    reqWithCallbackAsync("post", config.real_domain, '/api/queryPosiList', params,
         (code, msg, data) => {
             // store.state.posiData = data;
             store.commit("updatePosi", data)

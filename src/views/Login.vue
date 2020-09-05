@@ -43,6 +43,7 @@
 
 	import {queryCaptcha, login} from '../api/loginApi'
 	import encryptMD5 from 'js-md5'
+	import {queryBalance, queryPosiList} from '../api/orderApi'
 
 	export default {
 		name: "Login",
@@ -104,6 +105,9 @@
 					// 跳转到主页面
 					this.logining = false;
 					this.$router.push({path: '/dashboard'});
+					// 初始化数据
+					queryBalance();
+					queryPosiList({});
 				}
 			},
 

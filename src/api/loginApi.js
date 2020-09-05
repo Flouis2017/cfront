@@ -20,7 +20,7 @@ export const logout = (params, callback) => {
 
 // 退出登录回调=>清除sessionStorage中的uid和token
 export const logoutCallback = (code, msg, data) => {
-    debugger;
+    // debugger;
 	if (code != 2000){
 		this.$message.error(msg);
 	} else {
