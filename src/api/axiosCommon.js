@@ -13,7 +13,7 @@ import axios from 'axios';
 export const reqWithCallbackAsync = (method, baseUrl, url, params, callback) => {
     params.token = sessionStorage.getItem('token');
     return axios({
-        timeout: 50000,
+        timeout: 500000,
         baseURL: baseUrl,
         method: method,
         url: url,
@@ -47,7 +47,7 @@ export const reqWithCallbackAsync = (method, baseUrl, url, params, callback) => 
 export const reqWithoutCallbackAsync = (method, baseUrl, url, params) => {
     params.token = sessionStorage.getItem('token');
     return axios({
-        timeout: 50000,
+        timeout: 500000,
         baseURL: baseUrl,
         method: method,
         url: url,

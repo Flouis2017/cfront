@@ -22,9 +22,9 @@ export const queryPosiList = (params) => {
         });
 };
 
-//查股票代码
-export const queryCodeName = (params) => {
-    return reqWithoutCallbackAsync("post", config.real_domain, '/api/code', params);
+//查股票代码-下拉选择框里面的数据
+export const queryStocks = (params) => {
+    return reqWithoutCallbackAsync("post", config.real_domain, '/api/stockSelect', params);
 };
 
 //查委托
