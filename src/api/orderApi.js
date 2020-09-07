@@ -48,9 +48,8 @@ export const queryTrade = () => {
 };
 
 //发送委托
-export const sendOrder = (params,callback) =>{
-    return reqWithCallbackAsync("post",config.real_domain,
-        '/api/sendorder',params,callback);
+export const sendOrder = (params, callback) => {
+    return reqWithCallbackAsync("post", config.real_domain, '/api/order', params, callback);
 };
 
 // 委托

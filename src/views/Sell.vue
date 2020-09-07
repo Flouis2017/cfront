@@ -13,12 +13,12 @@
 			<el-row>
 				<!-- 委托组件 -->
 				<el-col :span="12">
-					<order-form :direction="2"/>
+					<order-form :direction="1"/>
 				</el-col>
 
 				<!-- 订单簿组件 -->
 				<el-col :span="12">
-
+					<order-book/>
 				</el-col>
 			</el-row>
 
@@ -33,10 +33,11 @@
 
 	import PosiList from '../components/PosiList'
 	import OrderForm from '../components/OrderForm'
+	import OrderBook from '../components/OrderBook'
 
 	export default {
 		name: "Buy",
-		components: {PosiList, OrderForm}
+		components: {PosiList, OrderForm, OrderBook}
 	}
 </script>
 

@@ -13,7 +13,7 @@
 			<el-row>
 				<!-- 委托组件 -->
 				<el-col :span="12">
-					<order-form :direction="1"/>
+					<order-form :direction="0"/>
 				</el-col>
 
 				<!-- 订单簿组件 -->
